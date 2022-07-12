@@ -1,0 +1,15 @@
+body{
+    background-image: url('https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80');
+    background-position: center;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+	min-height:100vh;
+}
+
+table, th, td,tr {
+   border-bottom: 1px solid #ddd;
+    margin-left: auto;
+  margin-right: auto;
+  color: white;
+  }

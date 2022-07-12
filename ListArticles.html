@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Articles</title>
+    <link rel="stylesheet" href="ListArticles.css">
+</head>
+<body>
+    
+    <table id="table">
+       <th>Title: </th>
+       <th> Category: </th>
+       <th>Date of Publication: </th>
+
+    </table>
+    <script>
+        
+        fetch('http://localhost:8080/Articles')
+            .then(data=> data.json())
+            .then(data=>{
+                console.log(data)
+
+                var table = document.getElementById("table");
+
+
+                for(var i = 0; i < data.length; i++){
+                    //this creates the row for each element of the array
+                    var row = document.createElement("tr");
+                    
+                    var article = data[i];
+
+
+                    var col1 = document.createElement("td");
+                    col1.textContent = article.title;
+                    row.appendChild(col1);
+
+                    var col2 = document.createElement("td");
+                    col2.textContent = article.category;
+                    row.appendChild(col2);
+                    
+                    var col3=document.createElement("td");
+                    col3.textContent=article.publishedDate
+                    row.appendChild(col3);
+
+                    table.appendChild(row);
+                }
+                
+            })
+
+    </script>
+</body>
+</html>

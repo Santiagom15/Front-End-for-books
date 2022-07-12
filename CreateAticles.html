@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Article</title>
+    <link rel="stylesheet" href="CreateAticles.css">
+    
+</head>
+<body>
+    <div style="text-align:center">
+
+        <h1 style="text-align:center">Creating an Article</h1>
+    
+
+        <form>
+            Title:<br> <input type="text" id="title" placeholder="Title" value=" "> <br>
+            <div>
+            Content:<br> <textarea type="text" id="content" value=" "></textarea><br>
+            </div>
+            
+            Category:<br> <select name="Category" id="category"></select><br>
+    
+            <h1></h1>
+            
+        </form>
+        <button   id="saveArticle" type="button">Save info</button>
+    </div>
+    <script>
+        fetch("http://localhost:8080/Categories")
+        .then(data=>data.json())
+        .then(data=>{
+            console.log(data)
+            var selectBox=document.getElementById("category")
+           
+            
+
+            for(let i=0;i<data.length;i++){
+                var category=data[i]
+                
+                let newOption = new Option('','');
+                selectBox.add(newOption,undefined);
+
+                const opt=document.createElement("option");
+                const optTxt=document.createTextNode("Option Text")
+
+                opt.textContent=category.description
+                optTxt.textContent=category.description
+
+               newOption.appendChild(optTxt)
+
+               newOption.setAttribute('value',opt.textContent)
+
+               selectBox.appendChild(newOption)
+               
+            }
+
+
+        })
+    </script>
+
+    <script>
+//@JAVA SCRIPT
+const btn=document.getElementById("saveArticle");
+
+    btn?.addEventListener("click",function(e){
+        tit="";
+        cont="";
+        cate="";
+        pd="";
+
+        tit=document.getElementById("title").value+""
+        console.log(tit);
+        cont=document.getElementById("content").value+""
+        console.log(cont);
+        cate=document.getElementById("category").value+""
+        console.log(cate);
+        //pregunta sobre la fecha
+        pd=Date.now()+"";
+        console.log(pd)
+        
+        const article={
+        title:tit,
+        content:cont,
+        publishedDate:pd,
+        category:cate
+        }
+
+
+fetch('http://localhost:8080/Articles',{
+    method:'POST',
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body:JSON.stringify(article),
+})
+.then(response=>response.json)
+.then(data=>console.log(data))
+    });
+    </script>
+</body>
+</html>
